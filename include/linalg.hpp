@@ -1,3 +1,5 @@
+#ifndef LINALG_H
+#define LINALG_H
 #include <array>
 #include <cmath>
 #include <iostream>
@@ -79,33 +81,14 @@ std::ostream &operator<<(std::ostream &os, const Vector<N> &p) {
 template <int N> double Vector<N>::length() const {
   return std::sqrt(dot(*this));
 }
-template <> Vector<3> Vector<3>::cross(const Vector<3> &rhs) const {
-  return Vector<3>{{elements[1] * rhs[2] - elements[2] * rhs[1],
-                    elements[2] * rhs[0] - elements[0] * rhs[2],
-                    elements[0] * rhs[1] - elements[1] * rhs[0]}};
+template <> inline Vector<3> Vector<3>::cross(const Vector<3> &rhs) const {
+  return Vector<3>{
+      {elements[1] * rhs.elements[2] - elements[2] * rhs.elements[1],
+       elements[2] * rhs.elements[0] - elements[0] * rhs.elements[2],
+       elements[0] * rhs.elements[1] - elements[1] * rhs.elements[0]}};
 }
 using Vec3 = Vector<3>;
 using Vec2 = Vector<2>;
-
+using Vec4 = Vector<4>;
 } // namespace LinAlg
-int main() {
-
-  LinAlg::Vector<2> a;
-  LinAlg::Vector<2> b;
-  std::cout << "Welcome to my Vector library!" << std::endl;
-  std::cout << "Input the x coordinate of the first vector: ";
-  std::cin >> a[0];
-  std::cout << "Input the y coordinate of the first vector: ";
-  std::cin >> a[1];
-  std::cout << "Input the x coordinate of the second vector: ";
-  std::cin >> b[0];
-  std::cout << "Input the y coordinate of the second vector: ";
-  std::cin >> b[1];
-
-  std::cout << "a = " << a << "\n";
-  std::cout << "b = " << b << "\n";
-  std::cout << "a + b = " << a + b << "\n";
-  std::cout << "a - b = " << a - b << "\n";
-  std::cout << "a * 2 = " << a * 2 << "\n";
-  std::cout << "Dot(a, b) = " << a.dot(b) << "\n";
-}
+#endif
