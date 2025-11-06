@@ -1,5 +1,5 @@
+#include "linalg.hpp"
 #include <iostream>
-#include <linalg.hpp>
 
 int main() {
   LinAlg::Vec3 a{1, 2, 3};
